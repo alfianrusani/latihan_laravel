@@ -14,7 +14,7 @@ class StudentController extends Controller
     {
         return view('student.index', [
             'title' => 'Student',
-            'students' => Student::all(),
+            'students' => Student::latest()->get(),
         ]);
     }
 
@@ -31,7 +31,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'name' => 'required|max:255',
+        'nim' => 'required|digits:11|numeric',
+    ], [
+        'name.required' => 'Nama tidak boleh kosong',
+        'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+        'nim.required' => 'Nim tidak boleh kosong',
+        'nim.digits' => 'Nim wajib :digits digit',
+        'nim.numeric' => 'Nim wajib angka',
+    ]);
+
+    Student::create($validated);
+    return to_route('student.index')->withSuccess('Data berhasil ditambahkan');
     }
 
     /**
@@ -47,7 +59,10 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('student.edit', [
+            'title' => 'Edit Student',
+            'student' => $student,
+        ]);
     }
 
     /**
@@ -55,7 +70,19 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $validated = $request->validate([
+        'name' => 'required|max:255',
+        'nim' => 'required|digits:11|numeric',
+    ], [
+        'name.required' => 'Nama tidak boleh kosong',
+        'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+        'nim.required' => 'Nim tidak boleh kosong',
+        'nim.digits' => 'Nim wajib :digits digit',
+        'nim.numeric' => 'Nim wajib angka',
+    ]);
+
+    $student->update($validated);
+    return to_route('student.index')->withSuccess('Data berhasil diubah');
     }
 
     /**
@@ -63,6 +90,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete($student);
+        return to_route('student.index')->withSuccess('Data berhasil dihapus');
     }
 }
