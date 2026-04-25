@@ -14,7 +14,7 @@ class DepartmentController extends Controller
     {
         return view('department.index', [
             'title' => 'Department',
-            'department' => Department::all(),
+            'department' => Department::latest()->get(),
         ]);
     }
 
@@ -23,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('department.create', ['title' => 'Create Department']);
     }
 
     /**
@@ -31,7 +31,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'name' => 'required|max:255',
+    ], [
+        'name.required' => 'Nama tidak boleh kosong',
+        'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+    ]);
+
+    Department::create($validated);
+    return to_route('department.index')->withSuccess('Data berhasil ditambahkan');
     }
 
     /**
@@ -47,7 +55,10 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return view('department.edit', [
+            'title' => 'Edit Department',
+            'department' => $department,
+        ]);
     }
 
     /**
@@ -55,7 +66,15 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $validated = $request->validate([
+        'name' => 'required|max:255',
+    ], [
+        'name.required' => 'Nama tidak boleh kosong',
+        'name.max' => 'Nama tidak boleh lebih dari 255 karakter',
+    ]);
+
+    $department->update($validated);
+    return to_route('department.index')->withSuccess('Data berhasil diubah');
     }
 
     /**
@@ -63,6 +82,7 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete($department);
+        return to_route('department.index')->withSuccess('Data berhasil dihapus');
     }
 }
