@@ -19,3 +19,5 @@ Route::resource('department', DepartmentController::class);
 Route::get('/department/create', [DepartmentController::class, 'create'])->name('department.create');
 Route::post('/department/store', [DepartmentController::class, 'store'])->name('department.store');
 Route::resource('lecturer', LecturerController::class);
+Route::get('/lecturer/create', [LecturerController::class, 'create'])->name('lecturer.create');
+Route::post('/lecturer/store', [LecturerController::class, 'store'])->name('lecturer.store');

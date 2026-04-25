@@ -11,6 +11,23 @@
                 </div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="department_id" class="form-label">Department</label>
+            <select class="form-select"
+                class="form-control @error('department_id') is-invalid @enderror"id="department_id"
+                name="department_id">
+                <option value>Pilih Program Studi</option>
+                @foreach ($departments as $department)
+                    <option value="{{ $department->id }}" @selected(old('department_id') == $department->id)>
+                        {{ $department->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('department_id')
+                <div class="invalid-feedback">{{ $message }}
+                </div>
+            @enderror
+        </div>
         <a class="btn btn-warning" href="{{ route('lecturer.index') }}" role="button">Back</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
