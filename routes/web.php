@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\OrganizationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,4 @@ Route::post('/department/store', [DepartmentController::class, 'store'])->name('
 Route::resource('lecturer', LecturerController::class);
 Route::get('/lecturer/create', [LecturerController::class, 'create'])->name('lecturer.create');
 Route::post('/lecturer/store', [LecturerController::class, 'store'])->name('lecturer.store');
+Route::resource('organization', OrganizationController::class);
