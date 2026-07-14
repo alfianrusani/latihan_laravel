@@ -22,10 +22,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link active" href="{{ route('student.index') }}">Student</a>
-                    <a class="nav-link active" href="{{ route('department.index') }}">Department</a>
-                    <a class="nav-link active" href="{{ route('lecturer.index') }}">Lecturer</a>
-                    <a class="nav-link active" href="{{ route('organization.index') }}">Organization</a>
+                    <a class="nav-link" href="{{ route('student.index') }}">Student</a>
+                    <a class="nav-link" href="{{ route('department.index') }}">Department</a>
+                    <a class="nav-link" href="{{ route('lecturer.index') }}">Lecturer</a>
+                    <a class="nav-link" href="{{ route('organization.index') }}">Organization</a>
+                    <a class="nav-link" href="{{ route('student.trash') }}">Trash</a>
                 </div>
             </div>
         </div>

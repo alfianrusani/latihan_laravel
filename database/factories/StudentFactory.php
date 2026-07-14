@@ -20,6 +20,7 @@ class StudentFactory extends Factory
         return [
             'name' => fake()->name(),
             'nim' => fake()->numerify('###########'),
+            'gender' => fake()->randomElement(['Male', 'Female']),
         ];
     }
 }

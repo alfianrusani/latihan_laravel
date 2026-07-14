@@ -11,7 +11,7 @@
     <ul class="list-group">
         @foreach ($students as $student)
             <li class="list-group-item">
-                {{ $loop->iteration }}, {{ $student->nim }}, {{ $student->name }}
+                {{ $loop->iteration }}. {{ $student->nim }} {{ $student->name }} -- {{ $student->gender }}
                 <a class="btn btn-warning btn-sm" href="{{ route('student.edit', $student) }}" role="button">Edit</a>
                 <form action="{{ route('student.destroy', $student) }}" method="POST" class="d-inline">
                     @method('DELETE')

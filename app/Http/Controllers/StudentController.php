@@ -61,7 +61,7 @@ class StudentController extends Controller
     {
         return view('student.edit', [
             'title' => 'Edit Student',
-            'student' => $student,
+            'students' => $student,
         ]);
     }
 
@@ -91,6 +91,25 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete($student);
-        return to_route('student.index')->withSuccess('Data berhasil dihapus');
+        return to_route('student.index')->withSuccess('Data Berhasil Dihapus');  
     }
+    //soft deletes
+    public function trash()
+    {
+        return view('student.trash', [
+            'title' => 'Trash Student',
+            'students' => Student::onlyTrashed()->latest()->get(),
+            ]);
+    }
+    public function restore(Student $student)
+    {
+        $student->restore();
+        return to_route('student.trash')->withSuccess('Data Berhasil Dikembalikan');  
+    }
+    public function forceDelete(Student $student)
+    {
+        $student->forceDelete();
+        return to_route('student.trash')->withSuccess('Data Berhasil Di Hapus Secara Permanen');  
+    }
+
 }
